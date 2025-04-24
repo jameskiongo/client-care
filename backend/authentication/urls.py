@@ -3,5 +3,5 @@ from django.urls import include, path
 from . import views
 
 urlpatterns = [
-    # path("", views.ClientView.as_view(), name="clients"),
+    path("login/", include("dj_rest_auth.urls")),
 ]
