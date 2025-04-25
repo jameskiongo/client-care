@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     "authentication",
     "client",
     "programs",
+    "enrollment",
 ]
 
 SITE_ID = 1
