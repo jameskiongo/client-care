@@ -1,7 +1,8 @@
 from django.urls import include, path
 
-from . import views
+from .views import ClientDetailsView, ClientView
 
 urlpatterns = [
-    path("", views.ClientView.as_view(), name="clients"),
+    path("", ClientView.as_view(), name="clients"),
+    path("client/<int:pk>/", ClientDetailsView.as_view(), name="client-detail"),
 ]

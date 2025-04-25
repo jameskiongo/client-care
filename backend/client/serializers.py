@@ -3,6 +3,8 @@ import datetime
 from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
 
+from enrollment.models import Enrollment
+
 from .models import Client
 
 
@@ -40,3 +42,35 @@ class ClientSerializer(serializers.ModelSerializer):
             if value.year < 1900:
                 raise serializers.ValidationError("Enter a valid year.")
         return value
+
+
+class ClientDetailSerializer(serializers.ModelSerializer):
+    enrolled_programs = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Client
+        fields = [
+            "id",
+            "name",
+            "email",
+            "phone",
+            "date_of_birth",
+            "enrolled_programs",
+        ]
+        read_only_fields = ["enrolled_programs"]
+
+    def get_enrolled_programs(self, obj):
+        enrollments = Enrollment.objects.filter(client=obj).select_related(
+            "program"
+        )  # Optimize DB queries
+
+        return [
+            {
+                "program_id": enrollment.program.id,
+                "program_name": enrollment.program.name,
+                "program_description": enrollment.program.description,
+                "enrollment_date": enrollment.enrollment_date,
+                "completion_date": enrollment.completion_date,
+            }
+            for enrollment in enrollments
+        ]

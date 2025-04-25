@@ -111,7 +111,6 @@ def test_create_client_authenticated(client):
         "name": "John Doe",
         "email": "j@mail.com",
         "phone": "+123456789",
-        "address": "123 Main St",
     }
     response = client.post(url, data, format="json")
 

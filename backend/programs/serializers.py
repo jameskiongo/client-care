@@ -1,7 +1,6 @@
 from django.utils import timezone
 from rest_framework import serializers
 
-from client.serializers import ClientSerializer
 from enrollment.models import Enrollment
 
 from .models import Program
@@ -75,6 +74,7 @@ class ProgramDetailSerializer(serializers.ModelSerializer):
         return obj.enrollments.count()
 
     def get_enrolled_clients(self, obj):
+        from client.serializers import ClientSerializer
 
         enrollments = Enrollment.objects.filter(program=obj).select_related("client")
         clients = [enrollment.client for enrollment in enrollments]
