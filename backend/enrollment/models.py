@@ -14,15 +14,6 @@ class Enrollment(models.Model):
     )
     enrollment_date = models.DateField(auto_now_add=True)
     completion_date = models.DateField(null=True, blank=True)
-    status = models.CharField(
-        max_length=20,
-        choices=[
-            ("active", "Active"),
-            ("completed", "Completed"),
-            ("dropped", "Dropped"),
-        ],
-        default="active",
-    )
 
     def __str__(self):
         return f"{self.client} enrolled in {self.program}"
