@@ -1,4 +1,5 @@
 import { useFormik } from "formik";
+import { Link } from "react-router";
 import { useAuth } from "../utils/AuthProvider";
 import { useNavigate } from "react-router";
 import toast from "react-hot-toast";
@@ -34,23 +35,15 @@ function LoginPage() {
   });
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      {/* Hero */}
-      <div className="max-w-[85rem] h-full flex items-center justify-center  mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen w-full flex items-center justify-center bg-gray-100">
+      <div className="mt-7 w-full max-w-md border border-gray-200 rounded-lg shadow-md p-20 bg-white">
         {/* Grid */}
-        <div className="grid lg:grid-cols-7 lg:gap-x-8 xl:gap-x-12 lg:items-center">
-          <div className="lg:col-span-3">
-            <h1 className="block text-3xl font-bold text-gray-800 sm:text-4xl md:text-5xl lg:text-6xl">
-              Client care system
-            </h1>
-            <p className="mt-3 text-lg text-gray-800">
-              Health program management system for enrolling and tracking client
-              information
-            </p>
-            <div>
-              <h2 className="text-3xl font-bold my-4">Please login</h2>
+        <div className="w-full">
+          <div className="w-full">
+            <div className="w-full">
+              <h2 className="text-3xl font-bold my-4 capitalize">login</h2>
             </div>
-            <div>
+            <div className="w-full">
               <form onSubmit={formik.handleSubmit}>
                 <div className="mb-4">
                   <label
@@ -123,13 +116,13 @@ function LoginPage() {
           </div>
           {/* End Col */}
 
-          <div className="lg:col-span-4 mt-10 lg:mt-0">
-            <img
-              className="w-full rounded-xl"
-              src="https://thumbs.dreamstime.com/b/medical-hospital-healthcare-vector-infographics-doctors-departments-poster-cardiology-heart-pills-stethoscope-88016897.jpg"
-              alt="Hero Image"
-            />
-          </div>
+          {/* <div className="lg:col-span-4 mt-10 lg:mt-0"> */}
+          {/*   <img */}
+          {/*     className="w-full rounded-xl" */}
+          {/*     src="https://thumbs.dreamstime.com/b/medical-hospital-healthcare-vector-infographics-doctors-departments-poster-cardiology-heart-pills-stethoscope-88016897.jpg" */}
+          {/*     alt="Hero Image" */}
+          {/*   /> */}
+          {/* </div> */}
           {/* End Col */}
         </div>
         {/* End Grid */}

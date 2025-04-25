@@ -1,4 +1,5 @@
 import HomePage from "./pages/HomePage";
+import LandingPage from "./pages/LandingPage";
 import LoginPage from "./pages/LoginPage";
 import Root from "./pages/Root";
 import AuthProvider from "./utils/AuthProvider";
@@ -13,8 +14,9 @@ import {
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Root />}>
-      <Route index element={<LoginPage />} />
+      <Route index element={<LandingPage />} />
       {/* <Route path="*" element={<NotFoundPage />} /> */}
+      <Route path="/login" element={<LoginPage />} />
       <Route element={<PrivateRoutes />}>
         <Route path="/dashboard" element={<HomePage />} />
       </Route>
