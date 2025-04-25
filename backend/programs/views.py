@@ -7,7 +7,7 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 
 # Create your views here.
 from .models import Program
-from .serializers import ProgramSerializer
+from .serializers import ProgramDetailSerializer, ProgramSerializer
 
 
 class ProgramView(APIView):
@@ -33,13 +33,13 @@ class ProgramSpecificView(APIView):
 
     def get(self, request, pk):
         program = get_object_or_404(Program, pk=pk)
-        serializer = ProgramSerializer(program)
+        serializer = ProgramDetailSerializer(program)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def put(self, request, pk):
         program = get_object_or_404(Program, pk=pk)
 
-        serializer = ProgramSerializer(program, data=request.data, partial=True)
+        serializer = ProgramDetailSerializer(program, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)

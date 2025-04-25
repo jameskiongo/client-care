@@ -29,7 +29,16 @@ class EnrollmentSerializer(serializers.ModelSerializer):
             "enrollment_date",
             "completion_date",
         ]
-        read_only_fields = ["enrollment_date"]
+        read_only_fields = ["enrollment_date", "client", "program"]
+
+    def validate(self, data):
+        client = data.get("client", self.instance.client if self.instance else None)
+        program = data.get("program", self.instance.program if self.instance else None)
+        if Enrollment.objects.filter(client=client, program=program).exists():
+            raise serializers.ValidationError(
+                "This client is already enrolled in this program."
+            )
+        return data
 
     def validate_completion_date(self, value):
         if value and value < self.instance.enrollment_date:
