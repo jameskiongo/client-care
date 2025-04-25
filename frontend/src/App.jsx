@@ -1,5 +1,11 @@
+import LoginPage from "./pages/LoginPage";
+
 function App() {
-  return <div className="text-sm underline">app</div>;
+  return (
+    <div>
+      <LoginPage />
+    </div>
+  );
 }
 
 export default App;
