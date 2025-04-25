@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     "dj_rest_auth.registration",
     "authentication",
     "client",
+    "programs",
 ]
 
 SITE_ID = 1
