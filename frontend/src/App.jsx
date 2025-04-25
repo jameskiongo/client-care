@@ -1,6 +1,8 @@
 import HomePage from "./pages/HomePage";
+import IndividualProgram from "./pages/IndividualProgram";
 import LandingPage from "./pages/LandingPage";
 import LoginPage from "./pages/LoginPage";
+import ProgramCreate from "./pages/ProgramCreate";
 import Root from "./pages/Root";
 import AuthProvider from "./utils/AuthProvider";
 import PrivateRoutes from "./utils/ProtectedRoutes";
@@ -19,6 +21,8 @@ const router = createBrowserRouter(
       <Route path="/login" element={<LoginPage />} />
       <Route element={<PrivateRoutes />}>
         <Route path="/dashboard" element={<HomePage />} />
+        <Route path="/program/:program_id" element={<IndividualProgram />} />
+        <Route path="/create_program" element={<ProgramCreate />} />
       </Route>
     </Route>,
   ),
