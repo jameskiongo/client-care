@@ -6,17 +6,30 @@ import {
   programsApi,
   useGetProgramByIdQuery,
 } from "./apis/programs";
+import {
+  patientsApi,
+  useGetAllPatientsQuery,
+  useGetPatientByIdQuery,
+} from "./apis/patients";
 
 export const store = configureStore({
   reducer: {
     [userApi.reducerPath]: userApi.reducer,
     [programsApi.reducerPath]: programsApi.reducer,
+    [patientsApi.reducerPath]: patientsApi.reducer,
   },
 
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
       .concat(userApi.middleware)
+      .concat(patientsApi.middleware)
       .concat(programsApi.middleware),
 });
 setupListeners(store.dispatch);
-export { useLoginMutation, useGetAllProgramsQuery, useGetProgramByIdQuery };
+export {
+  useLoginMutation,
+  useGetAllProgramsQuery,
+  useGetProgramByIdQuery,
+  useGetAllPatientsQuery,
+  useGetPatientByIdQuery,
+};
