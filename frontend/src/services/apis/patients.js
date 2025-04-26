@@ -1,30 +1,30 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import baseQueryWithReauth from "../helpers/baseQueryReauth";
 
-const programsApi = createApi({
-  reducerPath: "programsApi",
+const patientsApi = createApi({
+  reducerPath: "patientsApi",
   baseQuery: baseQueryWithReauth,
   endpoints: (builder) => ({
-    getAllPrograms: builder.query({
+    getAllPatients: builder.query({
       query: () => ({
-        url: "programs/",
+        url: "clients/",
         method: "GET",
       }),
     }),
-    getProgramById: builder.query({
-      query: (program_id) => ({
-        url: `programs/program/${program_id}/`,
+    getPatientById: builder.query({
+      query: (client_id) => ({
+        url: `clients/client/${client_id}/`,
         method: "GET",
       }),
     }),
     createProgram: builder.mutation({
       query: (data) => ({
-        url: "programs/",
+        url: "clients/",
         method: "POST",
         body: data,
       }),
     }),
   }),
 });
-export const { useGetAllProgramsQuery, useGetProgramByIdQuery } = programsApi;
-export { programsApi };
+export const { useGetAllPatientsQuery, useGetPatientByIdQuery } = patientsApi;
+export { patientsApi };

@@ -1,5 +1,5 @@
-import ProgramComponents from "../components/ProgramComponents";
-import { useGetAllProgramsQuery } from "../services";
+import ProgramComponents from "../../components/ProgramComponents/ProgramComponents";
+import { useGetAllProgramsQuery } from "../../services/index.js";
 function HomePage() {
   const { data, error, isLoading } = useGetAllProgramsQuery();
   let content;

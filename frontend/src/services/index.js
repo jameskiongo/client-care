@@ -1,7 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { userApi, useLoginMutation } from "./apis/users";
-import { useGetAllProgramsQuery, programsApi } from "./apis/programs";
+import {
+  useGetAllProgramsQuery,
+  programsApi,
+  useGetProgramByIdQuery,
+} from "./apis/programs";
 
 export const store = configureStore({
   reducer: {
@@ -15,4 +19,4 @@ export const store = configureStore({
       .concat(programsApi.middleware),
 });
 setupListeners(store.dispatch);
-export { useLoginMutation, useGetAllProgramsQuery };
+export { useLoginMutation, useGetAllProgramsQuery, useGetProgramByIdQuery };

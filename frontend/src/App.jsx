@@ -1,8 +1,8 @@
-import HomePage from "./pages/HomePage";
-import IndividualProgram from "./pages/IndividualProgram";
-import LandingPage from "./pages/LandingPage";
-import LoginPage from "./pages/LoginPage";
-import ProgramCreate from "./pages/ProgramCreate";
+import HomePage from "./pages/HomePage/HomePage";
+import IndividualProgram from "./pages/ProgramPage/IndividualProgram";
+import LandingPage from "./pages/LandingPage/LandingPage";
+import LoginPage from "./pages/LoginPage/LoginPage";
+import ProgramCreate from "./pages/ProgramPage/ProgramCreate";
 import Root from "./pages/Root";
 import AuthProvider from "./utils/AuthProvider";
 import PrivateRoutes from "./utils/ProtectedRoutes";
@@ -13,6 +13,7 @@ import {
   RouterProvider,
   createBrowserRouter,
 } from "react-router";
+import PatientProfile from "./pages/PatientPage/PatientProfile";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Root />}>
@@ -22,6 +23,7 @@ const router = createBrowserRouter(
       <Route element={<PrivateRoutes />}>
         <Route path="/dashboard" element={<HomePage />} />
         <Route path="/program/:program_id" element={<IndividualProgram />} />
+        <Route path="/patient/:patient_id" element={<PatientProfile />} />
         <Route path="/create_program" element={<ProgramCreate />} />
       </Route>
     </Route>,

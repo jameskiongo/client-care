@@ -1,9 +1,9 @@
 import { useFormik } from "formik";
 import { Link } from "react-router";
-import { useAuth } from "../utils/AuthProvider";
+import { useAuth } from "../../utils/AuthProvider";
 import { useNavigate } from "react-router";
 import toast from "react-hot-toast";
-import { useLoginMutation } from "../services";
+import { useLoginMutation } from "../../services";
 import * as Yup from "yup";
 function LoginPage() {
   const { handleLogin } = useAuth();
