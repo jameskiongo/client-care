@@ -1,11 +1,15 @@
 import { useParams } from "react-router";
-import HSOverlay from "@preline/overlay";
 import { useGetPatientByIdQuery } from "../../services";
 import EnrolledPrograms from "../../components/PatientComponents/EnrolledPrograms";
+import { useState } from "react";
+import ProgramForm from "../../components/PatientComponents/ProgramForm";
+
 function PatientProfile() {
   const { patient_id } = useParams();
   const { data, isLoading, isFetching, isError } =
     useGetPatientByIdQuery(patient_id);
+  const [showEnrollForm, setShowEnrollForm] = useState(false);
+
   if (isLoading || isFetching) {
     return <p className="text-center font-bold">Loading...</p>;
   }
@@ -14,15 +18,15 @@ function PatientProfile() {
       <p className="text-center text-red-500 font-bold">Something went wrong</p>
     );
   }
-  const handleModal = () => {
-    const modal = new HSOverlay(document.querySelector("#hs-unstyled-modal"));
-    modal.open();
+
+  const toggleEnrollForm = () => {
+    setShowEnrollForm(!showEnrollForm);
   };
 
   return (
     <div>
       <div className="my-10">
-        <div className="max-w-[85rem] h-full  mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-[85rem] h-full mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-10">
             <h1 className="block text-3xl capitalize font-bold text-gray-800 sm:text-4xl md:text-5xl lg:text-6xl">
               {data.name} Profile
@@ -57,37 +61,27 @@ function PatientProfile() {
                 </h3>
                 <button
                   type="button"
-                  onClick={handleModal}
-                  id="open-btn"
+                  onClick={toggleEnrollForm}
                   className="justify-center text-sm text-blue-500"
-                  aria-haspopup="dialog"
-                  aria-expanded="false"
-                  aria-controls="hs-unstyled-modal"
-                  data-hs-overlay="#hs-unstyled-modal"
                 >
-                  Enroll to Program
+                  {showEnrollForm ? "Cancel" : "Enroll to Program"}
                 </button>
               </div>
+
+              {/* Enroll Form */}
+              {showEnrollForm && (
+                <ProgramForm
+                  toggleEnrollForm={toggleEnrollForm}
+                  patient_id={patient_id}
+                />
+              )}
+
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 {data.enrolled_programs.map((data) => (
                   <EnrolledPrograms key={data.id} data={data} />
                 ))}
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-      <div
-        id="hs-unstyled-modal"
-        class="hs-overlay hidden size-full fixed top-0 start-0 z-60 overflow-x-hidden overflow-y-auto pointer-events-none"
-        role="dialog"
-        tabindex="-1"
-        aria-labelledby="hs-unstyled-modal-label"
-      >
-        <div class="hs-overlay-open:opacity-100 hs-overlay-open:duration-500 opacity-0 transition-all sm:max-w-lg sm:w-full m-3 sm:mx-auto">
-          <div class="pointer-events-auto">
-            <h3 id="hs-unstyled-modal-label">Title</h3>
-            Modal content
           </div>
         </div>
       </div>

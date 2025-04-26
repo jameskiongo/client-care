@@ -7,6 +7,10 @@ import {
   useGetProgramByIdQuery,
 } from "./apis/programs";
 import {
+  enrollApi,
+  useEnrollPatientToProgramMutation,
+} from "./apis/enrollment";
+import {
   patientsApi,
   useGetAllPatientsQuery,
   useGetPatientByIdQuery,
@@ -15,6 +19,7 @@ import {
 export const store = configureStore({
   reducer: {
     [userApi.reducerPath]: userApi.reducer,
+    [enrollApi.reducerPath]: enrollApi.reducer,
     [programsApi.reducerPath]: programsApi.reducer,
     [patientsApi.reducerPath]: patientsApi.reducer,
   },
@@ -23,6 +28,7 @@ export const store = configureStore({
     getDefaultMiddleware()
       .concat(userApi.middleware)
       .concat(patientsApi.middleware)
+      .concat(enrollApi.middleware)
       .concat(programsApi.middleware),
 });
 setupListeners(store.dispatch);
@@ -32,4 +38,5 @@ export {
   useGetProgramByIdQuery,
   useGetAllPatientsQuery,
   useGetPatientByIdQuery,
+  useEnrollPatientToProgramMutation,
 };
