@@ -26,5 +26,9 @@ const programsApi = createApi({
     }),
   }),
 });
-export const { useGetAllProgramsQuery, useGetProgramByIdQuery } = programsApi;
+export const {
+  useGetAllProgramsQuery,
+  useGetProgramByIdQuery,
+  useCreateProgramMutation,
+} = programsApi;
 export { programsApi };

@@ -17,7 +17,7 @@ const patientsApi = createApi({
         method: "GET",
       }),
     }),
-    createProgram: builder.mutation({
+    addPatient: builder.mutation({
       query: (data) => ({
         url: "clients/",
         method: "POST",
@@ -26,5 +26,9 @@ const patientsApi = createApi({
     }),
   }),
 });
-export const { useGetAllPatientsQuery, useGetPatientByIdQuery } = patientsApi;
+export const {
+  useGetAllPatientsQuery,
+  useGetPatientByIdQuery,
+  useAddPatientMutation,
+} = patientsApi;
 export { patientsApi };

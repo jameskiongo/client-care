@@ -14,6 +14,7 @@ import {
   createBrowserRouter,
 } from "react-router";
 import PatientProfile from "./pages/PatientPage/PatientProfile";
+import PatientAdd from "./pages/PatientPage/PatientAdd";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Root />}>
@@ -25,6 +26,7 @@ const router = createBrowserRouter(
         <Route path="/program/:program_id" element={<IndividualProgram />} />
         <Route path="/patient/:patient_id" element={<PatientProfile />} />
         <Route path="/create_program" element={<ProgramCreate />} />
+        <Route path="/add_patient" element={<PatientAdd />} />
       </Route>
     </Route>,
   ),
