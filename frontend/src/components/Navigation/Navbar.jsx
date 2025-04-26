@@ -80,7 +80,13 @@ function Navbar() {
                           className="p-2 capitalize flex items-center text-sm text-gray-800 hover:bg-gray-100 rounded-lg focus:outline-hidden focus:bg-gray-100"
                           to="/dashboard"
                         >
-                          dashboard
+                          programs
+                        </Link>
+                        <Link
+                          className="p-2 capitalize flex items-center text-sm text-gray-800 hover:bg-gray-100 rounded-lg focus:outline-hidden focus:bg-gray-100"
+                          to="/patients"
+                        >
+                          clients
                         </Link>
                       </div>
 

@@ -15,6 +15,7 @@ import {
 } from "react-router";
 import PatientProfile from "./pages/PatientPage/PatientProfile";
 import PatientAdd from "./pages/PatientPage/PatientAdd";
+import AllPatients from "./pages/PatientPage/AllPatients";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Root />}>
@@ -23,6 +24,7 @@ const router = createBrowserRouter(
       <Route path="/login" element={<LoginPage />} />
       <Route element={<PrivateRoutes />}>
         <Route path="/dashboard" element={<HomePage />} />
+        <Route path="/patients" element={<AllPatients />} />
         <Route path="/program/:program_id" element={<IndividualProgram />} />
         <Route path="/patient/:patient_id" element={<PatientProfile />} />
         <Route path="/create_program" element={<ProgramCreate />} />
