@@ -29,6 +29,13 @@ const patientsApi = createApi({
       }),
       invalidatesTags: ["Patients"], // This mutation invalidates 'Patients' tag
     }),
+    searchPatients: builder.query({
+      query: (searchTerm) => ({
+        url: `clients?search=${searchTerm}`,
+        method: "GET",
+      }),
+      providesTags: ["Patients"], // This query provides 'Patients' tag
+    }),
   }),
 });
 
@@ -36,5 +43,6 @@ export const {
   useGetAllPatientsQuery,
   useGetPatientByIdQuery,
   useAddPatientMutation,
+  useSearchPatientsQuery,
 } = patientsApi;
 export { patientsApi };

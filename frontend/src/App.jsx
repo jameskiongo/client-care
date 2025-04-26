@@ -16,6 +16,7 @@ import {
 import PatientProfile from "./pages/PatientPage/PatientProfile";
 import PatientAdd from "./pages/PatientPage/PatientAdd";
 import AllPatients from "./pages/PatientPage/AllPatients";
+import SearchPage from "./pages/SearchPage/SearchPage";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Root />}>
@@ -24,6 +25,7 @@ const router = createBrowserRouter(
       <Route path="/login" element={<LoginPage />} />
       <Route element={<PrivateRoutes />}>
         <Route path="/dashboard" element={<HomePage />} />
+        <Route path="/search" element={<SearchPage />} />
         <Route path="/patients" element={<AllPatients />} />
         <Route path="/program/:program_id" element={<IndividualProgram />} />
         <Route path="/patient/:patient_id" element={<PatientProfile />} />

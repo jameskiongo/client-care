@@ -1,6 +1,6 @@
 import PatientCard from "../../components/PatientComponents/PatientCard";
 import { useGetAllPatientsQuery } from "../../services/index.js";
-function HomePage() {
+function AllPatients() {
   const { data, error, isLoading } = useGetAllPatientsQuery();
   let content;
   if (isLoading) {
@@ -31,4 +31,4 @@ function HomePage() {
   );
 }
 
-export default HomePage;
+export default AllPatients;

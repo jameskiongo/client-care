@@ -1,112 +1,216 @@
 import { Link } from "react-router";
 import { useNavigate } from "react-router";
 import { useAuth } from "../../utils/AuthProvider";
+import { useState } from "react";
+import SearchBar from "./SearchBar";
 
 function Navbar() {
   const navigate = useNavigate();
   const { logout } = useAuth();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const accessToken = localStorage.getItem("accessToken");
+
   const handleLogout = () => {
     logout();
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");
     navigate("/login");
   };
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
     <div>
-      {/* ========== HEADER ========== */}
-      <header className="flex flex-wrap  md:justify-start md:flex-nowrap z-50 w-full bg-white border-b border-gray-200">
-        <nav className="relative max-w-[85rem] w-full mx-auto md:flex md:items-center md:justify-between md:gap-3 py-2 px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center gap-x-1">
+      <header className="flex flex-wrap md:justify-start py-3 md:flex-nowrap z-50 w-full bg-white border-b border-gray-200 relative">
+        <nav className="relative max-w-[85rem] w-full mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Mobile Header */}
+          <div className="flex items-center justify-between py-2 md:hidden">
             <Link
-              className="flex-none font-semibold text-xl text-black focus:outline-hidden focus:opacity-80"
+              className="flex-none font-semibold text-xl text-black"
               aria-label="Brand"
               to="/"
             >
               Client Care System
             </Link>
+
+            <button
+              onClick={toggleMenu}
+              className="p-2 rounded-md text-gray-500 hover:bg-gray-100 focus:outline-none"
+              aria-label="Toggle menu"
+            >
+              <svg
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                {isMenuOpen ? (
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                ) : (
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
+                )}
+              </svg>
+            </button>
+          </div>
+
+          <div className="hidden md:flex md:items-center md:justify-between">
+            <div className="flex items-center gap-x-1">
+              <Link
+                className="flex-none font-semibold text-xl text-black"
+                aria-label="Brand"
+                to="/"
+              >
+                Client Care System
+              </Link>
+            </div>
+
+            {/* Search Bar - Desktop */}
+            <SearchBar />
+
+            {/* Navigation Links - Desktop */}
+            <div className="flex items-center gap-x-1.5">
+              {!accessToken ? (
+                <Link
+                  to="/login"
+                  className="py-2 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700"
+                >
+                  Sign in
+                </Link>
+              ) : (
+                <>
+                  <div className="flex items-center gap-1">
+                    <Link
+                      className="p-2 capitalize flex items-center text-sm text-gray-800 hover:bg-gray-100 rounded-lg"
+                      to="/create_program"
+                    >
+                      Create Program
+                    </Link>
+                    <Link
+                      className="p-2 capitalize flex items-center text-sm text-gray-800 hover:bg-gray-100 rounded-lg"
+                      to="/add_patient"
+                    >
+                      Add Client
+                    </Link>
+                    <Link
+                      className="p-2 capitalize flex items-center text-sm text-gray-800 hover:bg-gray-100 rounded-lg"
+                      to="/dashboard"
+                    >
+                      Programs
+                    </Link>
+                    <Link
+                      className="p-2 capitalize flex items-center text-sm text-gray-800 hover:bg-gray-100 rounded-lg"
+                      to="/patients"
+                    >
+                      Clients
+                    </Link>
+                  </div>
+                  <button
+                    onClick={handleLogout}
+                    className="py-2 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700"
+                  >
+                    Logout
+                  </button>
+                </>
+              )}
+            </div>
           </div>
 
           <div
-            id="hs-header-base"
-            className="hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow md:block "
-            aria-labelledby="hs-header-base-collapse"
+            className={`${isMenuOpen ? "block" : "hidden"} md:hidden absolute top-full left-0 right-0 bg-white shadow-lg z-50`}
           >
-            <div className="overflow-hidden overflow-y-auto max-h-[75vh] [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300">
-              <div className="py-2 md:py-0  flex flex-col md:flex-row md:items-center gap-0.5 md:gap-1">
-                <div className="grow">
-                  {/* <div className="flex flex-col md:flex-row md:justify-end md:items-center gap-0.5 md:gap-1"> */}
-                  {/* <Link */}
-                  {/*   className="p-2 flex items-center text-sm text-gray-800 hover:bg-gray-100 rounded-lg focus:outline-hidden focus:bg-gray-100" */}
-                  {/*   to="/" */}
-                  {/* > */}
-                  {/*   dashboard */}
-                  {/* </Link> */}
-                  {/* </div> */}
+            {/* Search Bar - Mobile */}
+            <div className="px-4 pt-3 pb-2">
+              <div className="relative">
+                <input
+                  type="text"
+                  placeholder="Search..."
+                  className="w-full py-2 px-4 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring-blue-500"
+                />
+                <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                  <svg
+                    className="h-5 w-5 text-gray-400"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                    />
+                  </svg>
                 </div>
-
-                <div className="my-2 md:my-0 md:mx-2">
-                  {/* <div className="w-full h-px md:w-px md:h-4 bg-gray-100 md:bg-gray-300"></div> */}
-                </div>
-
-                {/* Button Group */}
-                <div className=" flex flex-wrap items-center gap-x-1.5">
-                  {!accessToken ? (
-                    <>
-                      <Link
-                        to="/login"
-                        className="py-2 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
-                      >
-                        Sign in
-                      </Link>
-                    </>
-                  ) : (
-                    <>
-                      <div className="flex flex-col md:flex-row md:justify-end md:items-center gap-0.5 md:gap-1">
-                        <Link
-                          className="p-2 capitalize flex items-center text-sm text-gray-800 hover:bg-gray-100 rounded-lg focus:outline-hidden focus:bg-gray-100"
-                          to="/create_program"
-                        >
-                          Create New Program
-                        </Link>
-                        <Link
-                          className="p-2 capitalize flex items-center text-sm text-gray-800 hover:bg-gray-100 rounded-lg focus:outline-hidden focus:bg-gray-100"
-                          to="/add_patient"
-                        >
-                          Add New Client
-                        </Link>
-
-                        <Link
-                          className="p-2 capitalize flex items-center text-sm text-gray-800 hover:bg-gray-100 rounded-lg focus:outline-hidden focus:bg-gray-100"
-                          to="/dashboard"
-                        >
-                          programs
-                        </Link>
-                        <Link
-                          className="p-2 capitalize flex items-center text-sm text-gray-800 hover:bg-gray-100 rounded-lg focus:outline-hidden focus:bg-gray-100"
-                          to="/patients"
-                        >
-                          clients
-                        </Link>
-                      </div>
-
-                      <Link
-                        onClick={handleLogout}
-                        className="py-2 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
-                      >
-                        Logout
-                      </Link>
-                    </>
-                  )}
-                </div>
-                {/* End Button Group */}
               </div>
             </div>
+
+            {/* Navigation Links - Mobile */}
+            <div className="px-2 pb-3 space-y-1">
+              {!accessToken ? (
+                <Link
+                  to="/login"
+                  className="block px-3 py-2 rounded-md text-base font-medium text-white bg-blue-600 hover:bg-blue-700"
+                  onClick={toggleMenu}
+                >
+                  Sign in
+                </Link>
+              ) : (
+                <>
+                  <Link
+                    to="/create_program"
+                    className="block px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:bg-gray-100"
+                    onClick={toggleMenu}
+                  >
+                    Create Program
+                  </Link>
+                  <Link
+                    to="/add_patient"
+                    className="block px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:bg-gray-100"
+                    onClick={toggleMenu}
+                  >
+                    Add Client
+                  </Link>
+                  <Link
+                    to="/dashboard"
+                    className="block px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:bg-gray-100"
+                    onClick={toggleMenu}
+                  >
+                    Programs
+                  </Link>
+                  <Link
+                    to="/patients"
+                    className="block px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:bg-gray-100"
+                    onClick={toggleMenu}
+                  >
+                    Clients
+                  </Link>
+                  <button
+                    onClick={() => {
+                      handleLogout();
+                      toggleMenu();
+                    }}
+                    className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white bg-blue-600 hover:bg-blue-700"
+                  >
+                    Logout
+                  </button>
+                </>
+              )}
+            </div>
           </div>
-          {/* End Collapse */}
         </nav>
       </header>
-      {/* ========== END HEADER ========== */}
     </div>
   );
 }

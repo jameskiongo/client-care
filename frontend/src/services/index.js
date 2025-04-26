@@ -13,6 +13,7 @@ import {
 import {
   patientsApi,
   useGetAllPatientsQuery,
+  useSearchPatientsQuery,
   useGetPatientByIdQuery,
   useAddPatientMutation,
 } from "./apis/patients";
@@ -41,4 +42,5 @@ export {
   useGetPatientByIdQuery,
   useEnrollPatientToProgramMutation,
   useAddPatientMutation,
+  useSearchPatientsQuery,
 };

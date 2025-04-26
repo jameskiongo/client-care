@@ -8,7 +8,7 @@ export default function Root() {
           <Navbar />
         </div>
         {/* <div className="hidden lg:block w-[80px] shadow-md fixed top-[65px] left-0 h-screen"> */}
-        <div className="">
+        <div className="bg-gray-100 w-full shadow-md fixed top-[65px] left-0 h-screen">
           <Outlet />
         </div>
       </div>

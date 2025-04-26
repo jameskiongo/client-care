@@ -15,7 +15,7 @@ function HomePage() {
     ));
   }
   return (
-    <div className="my-10">
+    <div className="py-10">
       {/* <div className="w-full h-screen flex items-center justify-center bg-gray-50"> */}
       <div className="max-w-[85rem] h-full  mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-10">
