@@ -14,6 +14,7 @@ import {
   patientsApi,
   useGetAllPatientsQuery,
   useGetPatientByIdQuery,
+  useAddPatientMutation,
 } from "./apis/patients";
 
 export const store = configureStore({
@@ -39,4 +40,5 @@ export {
   useGetAllPatientsQuery,
   useGetPatientByIdQuery,
   useEnrollPatientToProgramMutation,
+  useAddPatientMutation,
 };
