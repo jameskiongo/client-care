@@ -1,5 +1,7 @@
 from django.shortcuts import get_object_or_404
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import status
+from rest_framework.filters import SearchFilter
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -13,9 +15,16 @@ from .serializers import ClientDetailSerializer, ClientSerializer
 class ClientView(APIView):
     permission_classes = [IsAuthenticated]
     authentication_classes = [JWTAuthentication]
+    filter_backends = [DjangoFilterBackend, SearchFilter]
+    filterset_fields = ["email"]
+    search_fields = ["name", "email"]
 
     def get(self, request):
         clients = Client.objects.all()
+        # Apply filtering
+        for backend in list(self.filter_backends):
+            clients = backend().filter_queryset(self.request, clients, self)
+
         serializer = ClientSerializer(clients, many=True)
         return Response(serializer.data)
 
