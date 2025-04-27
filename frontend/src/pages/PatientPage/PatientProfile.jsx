@@ -40,7 +40,9 @@ function PatientProfile() {
                   {data.date_of_birth || "Not Provided"}
                 </span>
                 <h3 className="mb-1 text-xs italic text-gray-600">
-                  <span className="italic">Gender: M</span>
+                  <span className="italic capitalize">
+                    Gender: {data.gender || "Not Provided"}
+                  </span>
                 </h3>
               </div>
 

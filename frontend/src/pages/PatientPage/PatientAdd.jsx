@@ -37,7 +37,7 @@ function PatientAdd() {
         await createPatient(values).unwrap();
         toast.success("Patient added successfully!");
         resetForm();
-        navigate("/dashboard");
+        navigate("/patients");
       } catch (error) {
         console.error("Failed to add patient:", error);
         toast.error(

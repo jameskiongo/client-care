@@ -55,6 +55,7 @@ class ClientDetailSerializer(serializers.ModelSerializer):
             "email",
             "phone",
             "date_of_birth",
+            "gender",
             "enrolled_programs",
         ]
         read_only_fields = ["enrolled_programs"]

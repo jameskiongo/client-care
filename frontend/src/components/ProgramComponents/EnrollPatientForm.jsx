@@ -22,9 +22,8 @@ function EnrollPatientForm({ toggleEnrollForm, program_id }) {
     try {
       await enrollPatient({ program_id, client_id }).unwrap();
       toast.success("Patient enrolled successfully!");
-      window.location.reload(); // Refresh the page to show updated data
-
-      toggleEnrollForm(); // Close form on success
+      window.location.reload();
+      toggleEnrollForm();
     } catch (error) {
       console.error("Enrollment error:", error);
 

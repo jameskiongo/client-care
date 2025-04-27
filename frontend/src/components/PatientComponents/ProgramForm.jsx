@@ -18,6 +18,7 @@ function ProgramForm({ toggleEnrollForm, patient_id }) {
     try {
       await enrollPatient({ program_id, client_id }).unwrap();
       toast.success("Patient enrolled successfully");
+      window.location.reload();
       toggleEnrollForm();
     } catch (err) {
       if (err.data?.non_field_errors) {
