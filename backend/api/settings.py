@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "django.contrib.sites",
     "corsheaders",
     "django_filters",
+    "drf_spectacular",
     "rest_framework",
     "rest_framework.authtoken",
     "dj_rest_auth",
@@ -151,6 +152,7 @@ REST_FRAMEWORK = {
         "dj_rest_auth.jwt_auth.JWTCookieAuthentication",
     ),
     "DEFAULT_FILTER_BACKENDS": ["django_filters.rest_framework.DjangoFilterBackend"],
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
 REST_AUTH = {
     "USE_JWT": True,
@@ -169,3 +171,10 @@ else:
     CORS_ALLOWED_ORIGINS = [
         "http://localhost:5173/",
     ]
+SPECTACULAR_SETTINGS = {
+    "TITLE": "Client-Care API",
+    "DESCRIPTION": "A streamlined health program management system designed for healthcare providers to efficiently register clients, enroll them in various health programs, and manage their",
+    "VERSION": "1.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
+    # OTHER SETTINGS
+}
