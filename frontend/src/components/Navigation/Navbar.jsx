@@ -76,8 +76,8 @@ function Navbar() {
               </Link>
             </div>
 
-            {/* Search Bar - Desktop */}
-            <SearchBar />
+            {/* Search Bar - Desktop (only shown when logged in) */}
+            {accessToken && <SearchBar />}
 
             {/* Navigation Links - Desktop */}
             <div className="flex items-center gap-x-1.5">
@@ -101,7 +101,7 @@ function Navbar() {
                       className="p-2 capitalize flex items-center text-sm text-gray-800 hover:bg-gray-100 rounded-lg"
                       to="/add_patient"
                     >
-                      Add Client
+                      Add Patient
                     </Link>
                     <Link
                       className="p-2 capitalize flex items-center text-sm text-gray-800 hover:bg-gray-100 rounded-lg"
@@ -113,7 +113,7 @@ function Navbar() {
                       className="p-2 capitalize flex items-center text-sm text-gray-800 hover:bg-gray-100 rounded-lg"
                       to="/patients"
                     >
-                      Clients
+                      Patients
                     </Link>
                   </div>
                   <button
@@ -130,31 +130,33 @@ function Navbar() {
           <div
             className={`${isMenuOpen ? "block" : "hidden"} md:hidden absolute top-full left-0 right-0 bg-white shadow-lg z-50`}
           >
-            {/* Search Bar - Mobile */}
-            <div className="px-4 pt-3 pb-2">
-              <div className="relative">
-                <input
-                  type="text"
-                  placeholder="Search..."
-                  className="w-full py-2 px-4 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring-blue-500"
-                />
-                <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                  <svg
-                    className="h-5 w-5 text-gray-400"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                    />
-                  </svg>
+            {/* Search Bar - Mobile (only shown when logged in) */}
+            {accessToken && (
+              <div className="px-4 pt-3 pb-2">
+                <div className="relative">
+                  <input
+                    type="text"
+                    placeholder="Search..."
+                    className="w-full py-2 px-4 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring-blue-500"
+                  />
+                  <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                    <svg
+                      className="h-5 w-5 text-gray-400"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                      />
+                    </svg>
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
 
             {/* Navigation Links - Mobile */}
             <div className="px-2 pb-3 space-y-1">
